@@ -5,7 +5,7 @@ public class MoodAnalyzerException extends Exception
 {
     public enum ExceptionType
     {
-        NULL,EMPTY;
+        NULL,EMPTY,NO_SUCH_CLASS,NO_SUCH_METHOD
     }
     public ExceptionType type;
     public MoodAnalyzerException(ExceptionType type,String message)
@@ -18,3 +18,4 @@ public class MoodAnalyzerException extends Exception
         super(message);
     }
 }
+

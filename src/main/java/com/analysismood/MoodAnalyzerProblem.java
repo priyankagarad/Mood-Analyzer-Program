@@ -1,4 +1,5 @@
 package com.analysismood;
+import java.util.Objects;
 public class MoodAnalyzerProblem
 {
     String message;
@@ -26,8 +27,7 @@ public class MoodAnalyzerProblem
                 return "Sad";
             }
             return "Happy";
-        }
-        catch(NullPointerException e)
+        } catch(NullPointerException e)
         {
             throw new MoodAnalyzerException(MoodAnalyzerException.ExceptionType.NULL,"Null Message");
         }
@@ -36,4 +36,17 @@ public class MoodAnalyzerProblem
     {
         System.out.println("Welcome to Mood Analyzer");
     }
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this  == obj)
+        {
+            return true;
+        }
+        if(obj == null || getClass() != obj.getClass())
+            return false;
+        MoodAnalyzerProblem that=(MoodAnalyzerProblem )obj;
+        return Objects.equals(message,that.message);
+    }
 }
+
