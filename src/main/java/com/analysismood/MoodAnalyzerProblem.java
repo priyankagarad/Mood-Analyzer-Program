@@ -2,26 +2,35 @@ package com.analysismood;
 public class MoodAnalyzerProblem
 {
     String message;
+    //default constructor
     public MoodAnalyzerProblem()
     {
-        this.message=null;
     }
-    //created constructor and pass string parameter
+    //created parameterized constructor and pass string parameter
     public MoodAnalyzerProblem(String message)
     {
         this.message=message;
     }
     //created method for checking mood
+    //try and catch block use for handle nullPointer exception
     public String moodAnalyzerMethod(String mood)
     {
-        if (message.contains("Happy"))
+        try
+        {
+            if (message.contains("Happy"))
+            {
+                return "Happy";
+            }
+            else if (message.contains("Sad"))
+            {
+                return "Sad";
+            }
+        }
+        catch(NullPointerException e)
         {
             return "Happy";
-        } else if (message.contains("Sad"))
-        {
-            return "Sad";
         }
-        return mood;
+            return mood;
     }
     public static void main (String args[])
     {
