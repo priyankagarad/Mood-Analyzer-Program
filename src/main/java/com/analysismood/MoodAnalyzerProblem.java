@@ -13,24 +13,24 @@ public class MoodAnalyzerProblem
     }
     //created method for checking mood
     //try and catch block use for handle nullPointer exception
-    public String moodAnalyzerMethod(String mood)
+    public String moodAnalyzerMethod() throws MoodAnalyzerException
     {
         try
         {
-            if (message.contains("Happy"))
+            if (message.isEmpty())
             {
-                return "Happy";
+                throw new MoodAnalyzerException(MoodAnalyzerException.ExceptionType.EMPTY,"Message is Empty");
             }
-            else if (message.contains("Sad"))
+            if (message.contains("Sad"))
             {
                 return "Sad";
             }
+            return "Happy";
         }
         catch(NullPointerException e)
         {
-            return "Happy";
+            throw new MoodAnalyzerException(MoodAnalyzerException.ExceptionType.NULL,"Null Message");
         }
-            return mood;
     }
     public static void main (String args[])
     {
