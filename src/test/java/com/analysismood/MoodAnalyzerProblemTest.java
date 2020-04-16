@@ -62,7 +62,7 @@ public class MoodAnalyzerProblemTest
         MoodAnalyzerProblem moodAnalyzerReflector=MoodAnalyzerReflector.createMoodAnalyserDefault();
         Assert.assertEquals(new MoodAnalyzerProblem(),moodAnalyzerReflector);
     }
-    //4.2-->Method Not Found Exception
+    //TC:4.2,TC:5.2-->Method Not Found Exception
     @Test
     public void givenClassName_whenImproper_shouldReturnMoodAnalyzerException()
     {
@@ -75,7 +75,7 @@ public class MoodAnalyzerProblemTest
             Assert.assertEquals(MoodAnalyzerException.ExceptionType.NO_SUCH_METHOD,e.type);
         }
     }
-    //4.3--> Class Not Found Exception
+    //TC:4.3--> Class Not Found Exception
     @Test
     public void givenClassName_whenConstructorNotProper_shouldReturnMoodAnalyzerException()
     {
@@ -87,5 +87,12 @@ public class MoodAnalyzerProblemTest
         {
             Assert.assertEquals(MoodAnalyzerException.ExceptionType.NO_SUCH_CLASS,e.type);
         }
+    }
+    //TC:5.1
+    @Test
+    public void givenMoodAnalyzerUsingParameterizedConstructor_whenProper_shouldReturnObject()
+    {
+        MoodAnalyzerProblem moodAnalyzerReflector =  MoodAnalyzerReflector.createMoodAnalyzer("I am In Happy Mood");
+        Assert.assertEquals(new MoodAnalyzerProblem("I am In Happy Mood"),moodAnalyzerReflector);
     }
 }

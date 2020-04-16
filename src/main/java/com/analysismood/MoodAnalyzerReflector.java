@@ -13,14 +13,30 @@ public class MoodAnalyzerReflector
         } catch (ClassNotFoundException | NoSuchMethodException e)
         {
             e.printStackTrace();
-        } catch (IllegalAccessException e)
-        {
+        } catch (IllegalAccessException e) {
             e.printStackTrace();
-        } catch (InstantiationException e)
-        {
+        } catch (InstantiationException e) {
             e.printStackTrace();
-        } catch (InvocationTargetException e)
-        {
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    // Return Object of Parameterized Constructor
+    public static MoodAnalyzerProblem createMoodAnalyzer(String message)
+    {
+        try {
+            Constructor<?> constructor = Class.forName("com.analysismood.MoodAnalyzerProblem").getConstructor(String.class);
+            return (MoodAnalyzerProblem) constructor.newInstance(message);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
             e.printStackTrace();
         }
         return null;
