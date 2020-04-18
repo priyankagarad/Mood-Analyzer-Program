@@ -108,4 +108,18 @@ public class MoodAnalyzerProblemTest
             e.printStackTrace();
         }
     }
+    //TC:6.2
+    @Test
+    public void givenHappyMessage_whenImproperMethod_shouldThrowMoodAnalysisException()
+    {
+        MoodAnalyzerProblem moodAnalyzerReflector=MoodAnalyzerReflector.createMoodAnalyzer("I am in Happy Mood");
+        try
+        {
+            String mood=(String) MoodAnalyzerReflector.invokeMethod(moodAnalyzerReflector,"moodAnalyzerMethod1");
+            Assert.assertEquals("Happy",mood);
+        }catch(MoodAnalyzerException e)
+        {
+            Assert.assertEquals(MoodAnalyzerException.ExceptionType.NO_SUCH_METHOD,e.type);
+        }
+    }
 }
