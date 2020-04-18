@@ -1,10 +1,6 @@
 package com.analysismood;
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.lang.reflect.Constructor;
-import java.nio.channels.ScatteringByteChannel;
-
 public class MoodAnalyzerProblemTest
 {
     //TC:1.1--> Given Sad Mood Message Should Return Sad
@@ -144,6 +140,19 @@ public class MoodAnalyzerProblemTest
         catch (MoodAnalyzerException e)
         {
             Assert.assertEquals(MoodAnalyzerException.ExceptionType.NO_SUCH_FIELD,e.type);
+        }
+    }
+    //Tc:7.3
+    @Test
+    public void givenFieldNameAndNullValue_WhenSettingNullMessage_shouldThrowMoodAnalyzerException()
+    {
+        try {
+            MoodAnalyzerProblem moodObject = MoodAnalyzerReflector.createMoodAnalyserDefault();
+            MoodAnalyzerReflector.setFieldValue(moodObject, null, "message");
+        }
+        catch (MoodAnalyzerException e)
+        {
+            Assert.assertEquals(MoodAnalyzerException.ExceptionType.METHOD_INVOCATION_ISSUE,e.type);
         }
     }
 }
