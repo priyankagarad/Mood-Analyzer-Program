@@ -133,7 +133,17 @@ public class MoodAnalyzerProblemTest
         String mood=MoodAnalyzerReflector.setFieldValue(moodobject,"Happy","message");
         Assert.assertEquals("Happy",mood);
     }
-
-
-
+    //TC:7.2
+    @Test
+    public void givenFieldNameAndValue_whenFieldNotFound_shouldThrowMoodAnalyserException()
+    {
+        try {
+            MoodAnalyzerProblem moodObject = MoodAnalyzerReflector.createMoodAnalyserDefault();
+            MoodAnalyzerReflector.setFieldValue(moodObject, "Happy", "message1");
+        }
+        catch (MoodAnalyzerException e)
+        {
+            Assert.assertEquals(MoodAnalyzerException.ExceptionType.NO_SUCH_FIELD,e.type);
+        }
+    }
 }
