@@ -5,7 +5,7 @@ public class MoodAnalyzerProblemTest
 {
     //TC:1.1--> Given Sad Mood Message Should Return Sad
     @Test
-    public void givenSadMoodMessage_shouldReturnSad() throws MoodAnalyzerException
+    public void givenSadMoodMessage_whenValid_shouldReturnSad() throws MoodAnalyzerException
     {
         MoodAnalyzerProblem mood = new MoodAnalyzerProblem("I am in Sad Mood");
         String result = mood.moodAnalyzerMethod();
@@ -13,7 +13,7 @@ public class MoodAnalyzerProblemTest
     }
     //TC:1.2 --> Given Happy Mood Message Should Return Happy
     @Test
-    public void givenHappyMoodMessage_shouldReturnHappy() throws MoodAnalyzerException
+    public void givenHappyMoodMessage_whenValid_shouldReturnHappy() throws MoodAnalyzerException
     {
         MoodAnalyzerProblem mood = new MoodAnalyzerProblem("I am in Happy Mood");
         String result = mood.moodAnalyzerMethod();
@@ -21,7 +21,7 @@ public class MoodAnalyzerProblemTest
     }
     //TC:2.1--> Given Null Mood Should Return Happy
     @Test
-    public void givenNullMood_ShouldReturnHappy() throws MoodAnalyzerException
+    public void givenMood_whenNullMood_ShouldReturnHappy() throws MoodAnalyzerException
     {
         MoodAnalyzerProblem mood=new MoodAnalyzerProblem("NULL");
         String result=mood.moodAnalyzerMethod();
@@ -94,5 +94,18 @@ public class MoodAnalyzerProblemTest
     {
         MoodAnalyzerProblem moodAnalyzerReflector =  MoodAnalyzerReflector.createMoodAnalyzer("I am In Happy Mood");
         Assert.assertEquals(new MoodAnalyzerProblem("I am In Happy Mood"),moodAnalyzerReflector);
+    }
+    //TC:6.1
+    @Test
+    public void givenMoodAnalyzerParameterConstructor_whenProper_thenReturnObject()
+    {
+        MoodAnalyzerProblem moodAnalyzerReflector=MoodAnalyzerReflector.createMoodAnalyzer("I am in Happy Mood");
+        try
+        {
+            String mood=(String) MoodAnalyzerReflector.invokeMethod(moodAnalyzerReflector,"moodAnalyzerMethod") ;
+            Assert.assertEquals("Happy",mood);
+        } catch (MoodAnalyzerException e) {
+            e.printStackTrace();
+        }
     }
 }
