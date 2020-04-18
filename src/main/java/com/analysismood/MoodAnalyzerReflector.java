@@ -1,5 +1,6 @@
 package com.analysismood;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 public class MoodAnalyzerReflector
 {
@@ -25,7 +26,8 @@ public class MoodAnalyzerReflector
     // Return Object of Parameterized Constructor
     public static MoodAnalyzerProblem createMoodAnalyzer(String message)
     {
-        try {
+        try
+        {
             Constructor<?> constructor = Class.forName("com.analysismood.MoodAnalyzerProblem").getConstructor(String.class);
             return (MoodAnalyzerProblem) constructor.newInstance(message);
         } catch (NoSuchMethodException e) {
@@ -68,5 +70,21 @@ public class MoodAnalyzerReflector
             throw new MoodAnalyzerException(MoodAnalyzerException.ExceptionType.NO_SUCH_METHOD,e.getMessage());
         }
         return null;
+    }
+    public static String setFieldValue(MoodAnalyzerProblem obj, String message, String fieldName) throws MoodAnalyzerException
+    {
+        try {
+            Field field=obj.getClass().getDeclaredField(fieldName);
+            field.setAccessible(true);
+            field.set(obj,message);
+            return (String) obj.getClass().getDeclaredMethod("analyseMood").invoke(obj);
+        } catch (NoSuchFieldException e) {
+            throw new MoodAnalyzerException(MoodAnalyzerException.ExceptionType.NO_SUCH_FIELD,e.getMessage());
+        } catch (IllegalAccessException | NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            throw new MoodAnalyzerException(MoodAnalyzerException.ExceptionType.METHOD_INVOCATION_ISSUE,e.getMessage());
+        }
+        return message;
     }
 }
